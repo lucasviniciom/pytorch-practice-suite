@@ -1,0 +1,7 @@
+{
+  "python.terminal.activateEnvironment": true,
+  "python.venvPath": "C:\\Users\\lucas\\Documents\\Data Projects\\PyTorch_Basic\\venv-pytorch\\Scripts\\python.exe",
+  "python.defaultInterpreterPath": "C:\\Users\\lucas\\Documents\\Data Projects\\PyTorch_Basic\\venv-pytorch\\Scripts\\python.exe",
+  "python.pythonPath": "C:\\Users\\lucas\\Documents\\Data Projects\\PyTorch_Basic\\venv-pytorch\\Scripts\\python.exe",
+  "python-envs.pythonProjects": []
+}
