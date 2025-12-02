@@ -54,3 +54,4 @@ float_32_tensor = torch.tensor([3.0,6.0,9.0],
                                device = None, #What device tensor is on
                                requires_grad=False) #wheter or not track gradients in operations
 
+
