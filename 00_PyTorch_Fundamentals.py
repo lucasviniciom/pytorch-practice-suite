@@ -1,6 +1,7 @@
 ## 00. PyTorch Fundamentals
 
 import torch 
+import time
 print(torch.__version__)
 print(torch.cuda.is_available())
 
@@ -54,4 +55,47 @@ float_32_tensor = torch.tensor([3.0,6.0,9.0],
                                device = None, #What device tensor is on
                                requires_grad=False) #wheter or not track gradients in operations
 
+
+###Getting information from tensors
+# datatype - tensor.dtype
+# shape - tensor.shape
+# device - tensor.device
+
+some_tensor = torch.rand(3,4, dtype=torch.float16, device='cpu')
+print(some_tensor)
+print(f"Datatype: {some_tensor.dtype}")
+print(f"Shape: {some_tensor.shape}")
+print(f"Device: {some_tensor.device}")
+
+
+## gpu test
+
+# CPU
+#x_cpu = torch.randn(5000, 5000)
+#start = time.time()
+#y_cpu = x_cpu @ x_cpu
+#print("CPU time:", time.time() - start)
+
+# GPU
+#print("-----GPU Test-----")
+#print("CUDA available:", torch.cuda.is_available())
+#print("Current device index:", torch.cuda.current_device())
+#print("Device name:", torch.cuda.get_device_name(0))
+#x_gpu = x_cpu.to("cuda")
+#torch.cuda.synchronize()
+#start = time.time()
+#y_gpu = x_gpu @ x_gpu
+#torch.cuda.synchronize()
+#print("GPU time:", time.time() - start)
+
+###
+#torch.cuda.empty_cache()
+#print("Allocated:", torch.cuda.memory_allocated() / 1024**2, "MB")
+#print("Cached:", torch.cuda.memory_reserved() / 1024**2, "MB")
+
+# allocate
+#a = torch.randn(10000, 10000, device="cuda")
+#
+#print("Allocated after tensor:", torch.cuda.memory_allocated() / 1024**2, "MB")
+#print("Cached:", torch.cuda.memory_reserved() / 1024**2, "MB")
 
