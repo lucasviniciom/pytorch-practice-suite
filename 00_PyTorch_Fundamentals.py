@@ -99,3 +99,101 @@ print(f"Device: {some_tensor.device}")
 #print("Allocated after tensor:", torch.cuda.memory_allocated() / 1024**2, "MB")
 #print("Cached:", torch.cuda.memory_reserved() / 1024**2, "MB")
 
+### Manipulating Tensors
+## Tensor operations:
+# Adition, Subtraction, Multiplication(element-wise)
+# Division, Matrix multiplication
+
+tensor = torch.tensor([1,2,3])
+tensor = tensor + 10
+print(tensor)
+tensor *= 10
+print(tensor)
+tensor -= 10
+print(tensor)
+#Pytorch in-build functions. In general, prefer the python for basic ones. For complex mult, use torch.
+X = torch.mul(tensor,10)
+print(X)
+
+## Matrix multiplication
+# Elementwise
+tensor = torch.tensor([1,4,5])
+print(tensor,"*",tensor)
+print(f"Equals:{tensor * tensor}")
+
+#Matrix multiplication
+tensor_mult = torch.matmul(tensor,tensor)
+print(tensor_mult)
+
+#Transpose matrix - useful if mismatch
+
+tensor = torch.tensor([[1,4,5],[5,6,8]])
+
+tensor_T = tensor.T
+print(tensor_T)
+
+## Min, Max, Mean, Sum - Aggregations
+
+X = torch.arange(0, 100, 10)
+print(X)
+print(torch.min(X), X.min())
+print(torch.max(X), X.max())
+#print(torch.mean(X)) doesnt work with long, requires float32
+print(torch.mean(X.type(torch.float32))) 
+#Find positional min and max
+a = X.argmin()
+print(a)
+a = X.argmax()
+print(a)
+
+# Reshaping, stacking, squeezing and unsqueezing tensors
+# View = Return a view of an input tensor, keeping the same memory as original
+# Stacking - Combining multiple tensors on top(vstack) or side by side(hstack)
+# Squeeze - removels all 1 dimensions from a tensor
+# Unsqueeze - add a 1 dimensions to a target tensro
+# Permute - Return a view of the input with dimensions permuted/swapped in a certain way
+
+x = torch.arange(1, 10)
+print(x, x.shape)
+x_reshaped = x.reshape(1,9,1)
+print(x_reshaped,x_reshaped.shape)
+
+#Change view
+Z = X.view(2,5)
+print(Z, Z.shape)
+#Changing Z changes X - because a view of a tensor shares the same memory as the original
+Z[:,0]=5
+print(Z, X)
+
+#Stack tensors on top each other
+
+x_stacked = torch.stack([x,x,x,x])
+print(x_stacked)
+
+#Squeeze / Unsqueeze
+print(x_reshaped,x_reshaped.shape)
+x_squeezed= torch.squeeze(x_reshaped)
+print(x_reshaped,x_squeezed)
+
+print(f'Previous tensor: {x_squeezed}')
+print(f'Previous shape: {x_squeezed.shape}')
+x_unsqueezed =  x_squeezed.unsqueeze(dim=0)
+#The dimension here is where is going to add a new one, in which position of the dimensions [0,1,2..etc]
+print(f'New tensor: {x_unsqueezed}')
+print(f'New shape: {x_unsqueezed.shape}')
+
+# Permute - rearragen the dimensions in another order
+x_original = torch.rand(size=(224,224,3)) #common in images, height/widht/colour
+x_permuted = x_original.permute(2,0,1)
+
+print(f'Previous shape: {x_original.shape}')
+print(f'New shape: {x_permuted.shape}')
+
+print('----------')
+### Indexing - Selecting data from tensors
+X = torch.arange(1,19).reshape(2,3,3)
+print(X, X.shape)
+#Index examples
+print(X[:])
+print(X[:][1])
+print(X[:][1][0])
