@@ -2,6 +2,7 @@
 
 import torch 
 import time
+import numpy as np
 print(torch.__version__)
 print(torch.cuda.is_available())
 
@@ -196,4 +197,50 @@ print(X, X.shape)
 #Index examples
 print(X[:])
 print(X[:][1])
-print(X[:][1][0])
+print(X[:][1][2])
+
+## Pytorch tensors + Numpy
+
+array = np.arange(1.0,8.0)
+tensor = torch.from_numpy(array)
+#Reflects numpy default float64 unless specified otherwise
+print(array,tensor)
+#tensor to numpy
+tensor = torch.ones(7)
+numpy_tensor = tensor.numpy()
+print(tensor,numpy_tensor)
+
+#Reproducibility
+random_seed = 42
+torch.manual_seed(random_seed)
+random_tensor_A = torch.rand(3,4)
+random_seed = 42
+torch.manual_seed(random_seed)
+random_tensor_B = torch.rand(3,4)
+print(random_tensor_A)
+print(random_tensor_B)
+print(random_tensor_A == random_tensor_B)
+
+## Running tensors and Pytorch objects on GPUs
+## Setup device agnostic code
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+#Putting tensors (and models) on the GPU
+tensor = torch.tensor([1,2,3])
+#tensor not on GPU
+print(tensor, tensor.device)
+
+#Move to tensor
+tensor_on_gpu = tensor.to(device)
+print(tensor_on_gpu, tensor_on_gpu.device)
+
+## Move tensors back to CPU
+#If tensor is on GPU, can't transfor it to Numpy
+#This doesn't work
+#tensor_on_gpu.numpy()
+tensor_on_cpu = tensor.cpu()
+print(tensor_on_cpu, tensor_on_cpu.device)
+array = tensor_on_cpu.numpy()
+print(array)
+
+##
