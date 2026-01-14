@@ -1,2 +1,4 @@
 models/01_pytorch_workflow_model_0.pth
 models/01_pytorch_workflow_model_1.pth
+helper_functions.py
+__pycache__/helper_functions.cpython-313.pyc
